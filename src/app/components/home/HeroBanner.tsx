@@ -65,7 +65,7 @@ export default function HeroBanner() {
     return (
         <section className="banner-section">
             <div className="video-overlay-container">
-                {isClient && (
+                {(isClient && !isMobile) && (
                     <ReactPlayer 
                         className="overlay-video"
                         playing={true}
