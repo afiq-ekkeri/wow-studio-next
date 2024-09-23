@@ -22,6 +22,7 @@ type FooterProps = {
     whiteFooter?: boolean
 }
 
+
 export default function Footer({whiteFooter=false}: FooterProps) {
     return (
         <>
