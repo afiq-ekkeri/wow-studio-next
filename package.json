@@ -1,0 +1,28 @@
+{
+  "name": "wow-studio-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.2",
+    "lottie-web": "^5.12.2",
+    "next": "13.5.4",
+    "react": "^18",
+    "react-bootstrap": "^2.9.0",
+    "react-dom": "^18",
+    "react-fast-marquee": "^1.6.5",
+    "react-icons": "^4.12.0",
+    "react-player": "^2.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,148 @@
+.HalfAccordionsection {
+    background-color: #f1f1f1;
+}
+.titleContainerMobile {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    border-top: 2px solid;
+    border-bottom: 2px solid;
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    z-index: 1;
+    position: relative;
+}
+.bdArrowRed {
+    color: #d10000;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.worktitleContainerDesktop {
+    display: flex;
+    flex-direction: row;
+}
+.workIndex {
+    min-width: 50px;
+}
+.workListContainer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.workListItem {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.workListItem :global(.title-h1) {
+    margin:  0;
+}
+.AccordionContainer {
+    display: flex;
+    flex-grow: 1;
+}
+.AccordionContainer :global(.accordion-item) {
+    background-color: transparent;
+    width: 100%;
+    border: none;
+}
+.AccordionContainer :global(.accordion-button) {
+    background-color: transparent;
+    width: 100%;
+    padding: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: none !important;
+}
+.AccordionContainer :global(.accordion-button::after) {
+    display: none;
+}
+.AccordionContainer :global(.accordion-button:focus) {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.AccordionContainer p {
+    margin-bottom: 10px;
+}
+.AccordionContainer :global(.accordion-button:not(.collapsed) .seeMoreArrow) {
+    transform: rotateX(180deg);
+}
+.AccordionContainer :global(.collapsed .see-more) {
+    display: inline-block;
+}
+.AccordionContainer :global(.collapsed .see-less) {
+    display: none;
+}
+.seeMore {
+    display: none;
+}
+.seeLess {
+    display: inline-block;
+}
+.AccordionContainer :global(.accordion-body) {
+    padding-left: 0;
+    font-size: 18px;
+    
+}
+.accordianText:last-child  {
+    margin-bottom: 0;
+}
+.AccordionContainer .seeMoreText {
+    display: flex;
+    align-items: center;   
+}
+.AccordionContainer .seeMoreText span {
+    color: #d10000;
+    font-size: 22px;
+}
+.seeMoreArrow {
+    color: #d10000;
+    font-size: 16px;
+    margin-left: 5px;
+    transition: all ease 300ms;
+}
+.learnMoreArrow {
+    color: #d10000;
+    font-size: 22px;
+    margin-left: 2px;
+    position: relative;
+    transition: all ease 300ms;
+    bottom: -1px;
+    transform: scale(1.2);
+}
+
+.accordianText {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+@media (max-width: 1199.98px) {
+    .workIndex {
+        min-width: 35px;
+    }
+}
+@media (max-width: 991.98px) {
+    .workListContainer {
+        flex: 1.5;
+    }
+    .AccordionContainer .seeMoreText span {
+        font-size: 20px;
+    }
+}
+@media (max-width: 767.98px) {
+    .worktitleContainerDesktop {
+        display: none;
+    }
+    .AccordionContainer .seeMoreText span {
+        font-size: 18px;
+    }
+    .titleContainerMobile {
+        display: flex;
+    }
+    .HalfAccordionsection :global(.title-h1) {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+}
