@@ -2,6 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './globals.css'
 import GoogleAnalytics from '@/app/providers/GoogleAnalytics';
 import type { Metadata } from 'next'
+import Head from 'next/head'
+
 import localFont from 'next/font/local'
 import { Inter } from 'next/font/google'
 
@@ -23,6 +25,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Head>
+        <meta name="robots" content="noindex,nofollow" />
+      </Head>
       <GoogleAnalytics />
       <body className={`${georgia.className} ${blatant.className}`}>{children}</body>
     </html>

@@ -1,70 +1,89 @@
 'use client'
-import React, { createRef, useEffect } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Container } from 'react-bootstrap';
-import lottie from 'lottie-web';
 import animationData from '@/../public/lottie/atf-lottie-2.json';
 import animationDataMobile from '@/../public/lottie/atf-lotte-mobile.json';
 import GridBlock from '../gridblock/GridBlock';
 import dynamic from 'next/dynamic'
 
-const ReactPlayer = dynamic(() => import('react-player/lazy'), {
-    ssr: false
-})
-  
-
+const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 export default function HeroBanner() {
-    let lottieDesktopContainer:any = createRef();
-    let lottieMobileContainer:any = createRef();
+    const [isMobile, setIsMobile] = useState(false);
+    const [isClient, setIsClient] = useState(false);
+    const lottieDesktopContainer = createRef<HTMLDivElement>();
+    const lottieMobileContainer = createRef<HTMLDivElement>();
 
-    let animDesktop:any = null;
-    let animMobile:any = null;
     useEffect(() => {
-        if(window !== undefined) {
-            if(window.innerWidth >= 992) {
-                animDesktop = lottie.loadAnimation({
-                    container: lottieDesktopContainer.current,
-                    renderer: "svg",
-                    loop: true,
-                    autoplay: true,
-                    animationData: animationData,
-                    rendererSettings:{ preserveAspectRatio:'none' }
-                });
-                return () => animDesktop.destroy();
-            }
-            if(window.innerWidth < 991.98) {
-                animMobile = lottie.loadAnimation({
-                    container: lottieMobileContainer.current,
+        setIsClient(true);
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 991.98);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        if (!isClient) return;
+
+        let anim: any = null;
+
+        const loadLottie = async () => {
+            const lottieModule = await import('lottie-web');
+            const lottie = lottieModule.default;
+
+            if (isMobile) {
+                anim = lottie.loadAnimation({
+                    container: lottieMobileContainer.current!,
                     renderer: "svg",
                     loop: true,
                     autoplay: true,
                     animationData: animationDataMobile,
                 });
-                return () => animMobile.destroy();
+            } else {
+                anim = lottie.loadAnimation({
+                    container: lottieDesktopContainer.current!,
+                    renderer: "svg",
+                    loop: true,
+                    autoplay: true,
+                    animationData: animationData,
+                    rendererSettings: { preserveAspectRatio: 'none' }
+                });
             }
-        }
-    }, []);
+        };
+
+        loadLottie();
+
+        return () => {
+            if (anim) anim.destroy();
+        };
+    }, [isClient, isMobile]);
+
     return (
         <section className="banner-section">
             <div className="video-overlay-container">
-                <ReactPlayer 
-                    className="overlay-video"
-                    playing={true}
-                    width='100%'
-                    height='100%'
-                    url={"https://www.dropbox.com/s/0cb7v4nj52yc3wf/wow-studio-hd.mp4?dl=0"}
-                    config={{
-                        file: { 
-                            attributes: { 
-                            poster: '/video-placeholder-2.webp' 
+                {isClient && (
+                    <ReactPlayer 
+                        className="overlay-video"
+                        playing={true}
+                        width='100%'
+                        height='100%'
+                        url={"https://www.dropbox.com/s/0cb7v4nj52yc3wf/wow-studio-hd.mp4?dl=0"}
+                        config={{
+                            file: { 
+                                attributes: { 
+                                poster: '/video-placeholder-2.webp' 
+                                } 
                             } 
-                        } 
-                    }}
-                    muted={true}
-                    loop={true}
-                    controls={false}
-                />
+                        }}
+                        muted={true}
+                        loop={true}
+                        controls={false}
+                    />
+                )}
                 <div className="video-color-overlay"/>
                 <div className="lottie-container">
                     <div className="lottie" ref={lottieDesktopContainer}></div>

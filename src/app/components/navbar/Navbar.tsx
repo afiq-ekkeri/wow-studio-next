@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Container, Navbar as BootstrapNavbar, Nav } from 'react-bootstrap';
@@ -13,18 +13,19 @@ export default function Navbar({NavbarUnderlay}: Props) {
     const [navbar, setNavbar] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const pathname = usePathname();
-    useEffect(() =>{
-        const changeBackground = () => {
-            if(window.scrollY >= 77) {
-                setNavbar(true);
-            } else {
-                setNavbar(false);
-            }
-        };
+
+    const changeBackground = useCallback(() => {
+        if(window.scrollY >= 77) {
+            setNavbar(true);
+        } else {
+            setNavbar(false);
+        }
+    }, []);
+
+    useEffect(() => {
         window.addEventListener('scroll', changeBackground);
-        
-        return () => { document.removeEventListener('scroll',changeBackground ) }
-    },[navbar])
+        return () => window.removeEventListener('scroll', changeBackground);
+    }, [changeBackground]);
     
     return (
         <>
