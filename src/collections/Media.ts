@@ -38,4 +38,14 @@ export const Media: CollectionConfig = {
       required: true,
     },
   ],
+  hooks: {
+    beforeChange: [
+      ({ data }) => {
+        if (data.filename) {
+          return `${process.env.NEXT_PUBLIC_SERVER_URL}/media/${data.filename}`;
+        }
+        return undefined;
+      },
+    ],
+  },
 };
