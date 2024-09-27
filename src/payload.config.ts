@@ -16,19 +16,24 @@ dotenv.config({
 })
 
 const getSSLConfig = () => {
+  console.log('NODE_ENV:', process.env.NODE_ENV);
+  console.log('CERTIFICATE present:', !!process.env.CERTIFICATE);
+  
   if (process.env.NODE_ENV === 'production') {
     if (process.env.CERTIFICATE) {
+      console.log('Using provided SSL certificate');
       return {
         rejectUnauthorized: true,
         ca: process.env.CERTIFICATE
       }
     } else {
-      console.warn('No SSL certificate provided, SSL verification will be disabled')
+      console.warn('No SSL certificate provided, SSL verification will be disabled');
       return {
         rejectUnauthorized: false
       }
     }
   }
+  console.log('Not in production, SSL disabled');
   return false
 }
 

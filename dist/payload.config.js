@@ -15,6 +15,23 @@ var Media_1 = require("./collections/Media");
 dotenv_1.default.config({
     path: path_1.default.resolve(__dirname, '../.env'),
 });
+var getSSLConfig = function () {
+    if (process.env.NODE_ENV === 'production') {
+        if (process.env.CERTIFICATE) {
+            return {
+                rejectUnauthorized: true,
+                ca: process.env.CERTIFICATE
+            };
+        }
+        else {
+            console.warn('No SSL certificate provided, SSL verification will be disabled');
+            return {
+                rejectUnauthorized: false
+            };
+        }
+    }
+    return false;
+};
 exports.default = (0, config_1.buildConfig)({
     serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
     collections: [Media_1.Media],
@@ -59,9 +76,7 @@ exports.default = (0, config_1.buildConfig)({
     db: (0, db_postgres_1.postgresAdapter)({
         pool: {
             connectionString: process.env.DATABASE_URL,
-            ssl: process.env.NODE_ENV === 'production'
-                ? { rejectUnauthorized: true }
-                : { rejectUnauthorized: false }
+            ssl: getSSLConfig()
         }
     }),
     typescript: {
