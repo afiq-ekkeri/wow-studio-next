@@ -1,57 +1,87 @@
-import Link from 'next/link'
-import Image from 'next/image'
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import GridBlock from '@/app/components/gridblock/GridBlock';
 
+interface ProjectItemProps {
+    href: string;
+    ariaLabelledby: string;
+    imageSrc: string;
+    imageAlt: string;
+    title: string;
+    projectType: string;
+    projectTypeHref: string;
+    projectTypeAriaLabelledby: string;
+}
 
-export default function ProjectsSection() {
+const ProjectItem: React.FC<ProjectItemProps> = ({
+    href,
+    ariaLabelledby,
+    imageSrc,
+    imageAlt,
+    title,
+    projectType,
+    projectTypeHref,
+    projectTypeAriaLabelledby
+}) => (
+    <div className="project-container">
+        <Link className='absolute inset-fill z-1' href={href} aria-labelledby={ariaLabelledby}></Link>
+        <div className="project-poster-container z-0">
+            <Image
+                src={imageSrc}
+                alt={imageAlt}
+                fill
+                priority
+            />
+        </div>
+        <div className="project-title-container relative z-2">
+            <h3 className="title-h3">{title}</h3>
+            <Link href={projectTypeHref} aria-labelledby={projectTypeAriaLabelledby} className="project-type">{projectType}</Link>
+        </div>
+    </div>
+);
+
+const ProjectsSection: React.FC = () => {
     return (
         <section className="projects-section">
             <GridBlock containerClass="mt-142">
-                <Link href="/services/brand-strategy" aria-labelledby="Brand Strategy and Design Agency in Dubai and Abu Dhabi UAE Wow Studio .io UAE" className="project-container">
-                    <div className="project-poster-container">
-                        <Image
-                            src="/project-1.webp"
-                            alt="Walsos Identity design"
-                            fill
-                            priority
-                        />
-                    </div>
-                    <div className="project-title-container">
-                        <h3 className="title-h3">{'GET YOUR ADVICE FROM EXPERTS WORLDWIDE'}</h3>
-                        <Link href="/services/brand-strategy" aria-labelledby="Brand Strategy and Design Agency in Dubai and Abu Dhabi UAE Wow Studio .io UAE" className="project-type">{'BRAND STRATEGY'}</Link>
-                    </div>
-                </Link>
+                <ProjectItem
+                    href="/services/brand-strategy"
+                    ariaLabelledby="Brand Strategy and Design Agency in Dubai and Abu Dhabi UAE Wow Studio .io UAE"
+                    imageSrc="/project-1.webp"
+                    imageAlt="Walsos Identity design"
+                    title="GET YOUR ADVICE FROM EXPERTS WORLDWIDE"
+                    projectType="BRAND STRATEGY"
+                    projectTypeHref="/services/brand-strategy"
+                    projectTypeAriaLabelledby="Brand Strategy and Design Agency in Dubai and Abu Dhabi UAE Wow Studio .io UAE"
+                />
             </GridBlock>
             <GridBlock>
-                <Link href="/portfolio/nobots/" aria-labelledby="Identity Design of Nobots App by Wow Studio in Dubai and Abu Dhabi UAE" className="project-container">
-                    <div className="project-poster-container">
-                        <Image
-                            src="/project-2.webp"
-                            alt="Nobots Brand Strategy by Wow Studio"
-                            fill
-                        />
-                    </div>
-                    <div className="project-title-container">
-                        <h3 className="title-h3">PLATFORM FOR GAMING COMMUNITY</h3>
-                        <Link href="/services/identity-design" aria-labelledby="Creative Identity Design Services by Wow Studio in Dubai and Abu Dhabi UAE" className="project-type">{'IDENTITY DESIGN'}</Link>
-                    </div>
-                </Link>
+                <ProjectItem
+                    href="/portfolio/nobots/"
+                    ariaLabelledby="Identity Design of Nobots App by Wow Studio in Dubai and Abu Dhabi UAE"
+                    imageSrc="/project-2.webp"
+                    imageAlt="Nobots Brand Strategy by Wow Studio"
+                    title="PLATFORM FOR GAMING COMMUNITY"
+                    projectType="IDENTITY DESIGN"
+                    projectTypeHref="/services/identity-design"
+                    projectTypeAriaLabelledby="Creative Identity Design Services by Wow Studio in Dubai and Abu Dhabi UAE"
+                />
             </GridBlock>
             <GridBlock containerClass="mt-142">
-                <Link href="/portfolio/salamtik/" aria-labelledby="Identity Design of Salamtik by Wow Studio in Dubai and Abu Dhabi UAE" className="project-container">
-                    <div className="project-poster-container">
-                        <Image
-                            src="/project-3.webp"
-                            alt="Salamtik Identity Design by Wow Studio"
-                            fill
-                        />
-                    </div>
-                    <div className="project-title-container">
-                        <h3 className="title-h3">PLATFORM FOR GAMING COMMUNITY</h3>
-                        <Link href="/services/identity-design" aria-labelledby="Creative Identity Design Services by Wow Studio in Dubai and Abu Dhabi UAE" className="project-type">{'IDENTITY DESIGN'}</Link>
-                    </div>
-                </Link>
+                <ProjectItem
+                    href="/portfolio/salamtik/"
+                    ariaLabelledby="Identity Design of Salamtik by Wow Studio in Dubai and Abu Dhabi UAE"
+                    imageSrc="/project-3.webp"
+                    imageAlt="Salamtik Identity Design by Wow Studio"
+                    title="PLATFORM FOR GAMING COMMUNITY"
+                    projectType="IDENTITY DESIGN"
+                    projectTypeHref="/services/identity-design"
+                    projectTypeAriaLabelledby="Creative Identity Design Services by Wow Studio in Dubai and Abu Dhabi UAE"
+                />
             </GridBlock>
         </section>
     );
-}
+};
+
+export default ProjectsSection;

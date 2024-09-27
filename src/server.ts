@@ -23,6 +23,10 @@ const createContext = ({
 })
 
 export type ExpressContext = inferAsyncReturnType<typeof createContext>
+
+export type WebhookRequest = IncomingMessage & {
+  rawBody: Buffer
+}
 const start = async () => {
   
     const payload = await getPayloadClient({

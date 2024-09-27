@@ -1,0 +1,357 @@
+.servicesDetailPage {
+    display: flex;
+    flex-direction: column;
+    padding-top: 77px;
+}
+.detailHeaderSection {
+    background-color: #000000;
+    color: #fff;
+}
+.detailHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+}
+.servicesDetailPage :global(.studio-banner-container) {
+    padding-left: 1px;
+}
+.textWhite h1,
+.textWhite p {
+    color: #fff !important;
+}
+.detailHeaderContainer h1 {
+    margin-bottom: 16px;
+}
+.detailHeaderContainer p {
+    margin-bottom: 0;
+    line-height: 1.55;
+}
+.servicesDetailPage .headerTextContainer {
+    width: 50%;
+    max-width: 624px;
+    text-wrap: balance;
+}
+.webDesignIllustration {
+    height: 240px;
+    max-width: 360px;
+    object-fit: contain;
+}
+.contentContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+.contentContainer .contentTitleContainer {
+    flex: 1;
+}
+.contentContainer .contentTitleContainer p {
+    margin-bottom: 0;
+    text-wrap: balance;
+}
+.contentContainer .contentTitleContainer h2 {
+    margin-bottom: 16px;
+}
+.contentContainer .contentInfoContainer {
+    flex: 1;
+}
+.servicesInfoCardTitle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    align-items: center;
+}
+.servicesInfoCardTitle h3 {
+    margin-bottom: 0;
+}
+.cardIconContainer {
+    height: 50px;
+    max-width: 70px;
+}
+.cardIconContainer img {
+    height: 100%;
+}
+.servicesInfoCard p {
+    margin-bottom: 24px;
+    line-height: 1.55;
+    max-width: 770px;
+}
+a.brandLinks {
+    color: #D10000;
+    display: inline-flex;
+    column-gap: 8px;
+    align-items: center;
+}
+.webDesignBannerContainer {
+    margin-top: -69px;
+}
+.webDesignBannerOuter {
+    width: 100%;
+    max-height: 600px;
+    min-height: 320px;
+}
+.webDesignBannerOuter img {
+    height: 100%;
+    width: 100%;
+    object-position: 0% 0%;
+}
+.center.webDesignBannerOuter img {
+    object-position: 50% 50%;
+}
+.pr50 {
+    padding-right: 50px;
+}
+.pl50 {
+    padding-left: 50px;
+}
+.introSection {
+    display: flex;
+    flex-direction: column;
+}
+.introContainer,
+.contentContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.introTitleContainer {
+    flex: 1;
+}
+.introTitleContainer h2 {
+    margin-bottom: 0;
+}
+.introInfoContainer {
+    flex: 1;
+}
+.contentContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+.serviceImageContainer, 
+.serviceCardContainer {
+    flex: 1;
+}
+.serviceImageContainer {
+    height: 372px;
+}
+.serviceImageOuter {
+    height: 100%;
+    width: 100%;
+}
+.buttonFilled.buttonFilled {
+    background-color: var(--brand-red);
+    border: 1px solid var(--brand-red);
+    display: inline-block;
+    padding: 16px 26px 16px 32px;
+    align-items: center;
+    color: #fff;
+    line-height: 1;
+}
+.buttonFilled.outline {
+    background-color: #fff;
+    border: 1px solid #000;
+    display: inline-block;
+    padding: 16px 26px 16px 32px;
+    align-items: center;
+    color: #000;
+    line-height: 1;
+}
+.serviceCardContainer .buttonFilled svg {
+    margin-left: 12px;
+    font-size: 12px;
+}
+.serviceCardButtonGroup {
+    display: flex;
+    column-gap: 16px;
+}
+.leftRightSection > *:nth-child(2n) .contentContainer {
+    flex-direction: row-reverse;
+}
+.bannerImageContainer {
+    width: calc(100% - 2px);
+    max-height: 600px;
+    position: relative;
+}
+.studioBannerOuter {
+    max-width: 100%;
+    max-height: 600px;
+}
+.darkCtaSection {
+    background-color: #000;
+}
+.darkCtaContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #fff;
+    position: relative;
+}
+.darkCtaContainer h2 {
+    letter-spacing: -0.4px;
+    line-height: 1;
+    margin-bottom: 16px;
+}
+.darkCtaTextContainer {
+    max-width: 850px;
+}
+.darkCtaTextContainer p {
+    line-height: 1.4;
+    margin-bottom: 32px;
+}
+.darkCtaTextContainer :global(.cta-btn){
+    width: 236px;
+}
+.darkCtaLottieContainer {
+    position: absolute;
+    right: 108px;
+    height: 730px;
+    aspect-ratio: 18.22/7.30;
+    top: 0;
+    transform: translateX(100%);
+}
+@media (max-width: 1199.98px) {
+    .pr50 {
+        padding-right: 35px;
+    }
+    .pl50 {
+        padding-left: 35px;
+    }
+    .webDesignBannerContainer {
+        margin-top: -48px;
+    }
+    .darkCtaTextContainer {
+        max-width: calc(100% - 131px);
+    }
+    .darkCtaLottieContainer { 
+        height: 698px;
+    }
+}
+@media (max-width: 991.98px) {
+    /* .contentContainer .contentInfoContainer {
+        flex: 1.5;
+    } */
+    .introContainer {
+        align-items: flex-start;
+    }
+    .contentContainer {
+        flex-direction: column !important;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+    }
+    .contentContainer :global(.pr50) {
+        padding-right: 0px;
+    }
+    .contentContainer :global(.pl50) {
+        padding-left: 0px;
+    }
+    .webDesignBannerOuter {
+        height: 440px;
+    }
+    .webDesignBannerContainer {
+        margin-top: -41px;
+    }
+    .introInfoContainer {
+        flex: 1.5;
+    }
+    .studioBannerOuter {
+        height: 400px;
+    }
+    .serviceImageContainer {
+        flex-grow: 0;
+        width: 100%;
+        max-width: 600px;
+    }
+    .serviceCardContainer {
+        max-width: 600px;
+        margin-top: 24px;
+    }
+    .darkCtaTextContainer {
+        max-width: calc(100% - 196px);
+    }
+    .darkCtaTextContainer :global(.cta-btn){
+        width: 180px;
+        height: 56px;
+    }
+    .darkCtaLottieContainer { 
+        height: 625px;
+    }
+}
+@media (max-width: 767.98px) {
+    /* .pr50 {
+        padding-right: 0px;
+    }
+    .pl50 {
+        padding-left: 0px;
+    } */
+    /* .contentContainer {
+        flex-direction: column;
+    } */
+    .contentTitleContainer {
+        margin-bottom: 30px;
+    }
+    .detailHeaderContainer {
+        flex-direction: column;
+        row-gap: 2rem;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+    .servicesDetailPage .headerTextContainer {
+        width: 100%;
+    }
+    .servicesDetailPage .headerTextContainer p {
+        opacity: 0.9;
+    }
+    .webDesignIllustration {
+        max-width: 100%;
+    }
+    .webDesignBannerContainer {
+        margin-top: -34px;
+    }
+    .introContainer {
+        flex-direction: column;
+    }
+    .introTitleContainer {
+        margin-bottom: 10px;
+    }
+}
+@media (max-width: 575.98px) {
+    .servicesDetailPage .headerTextContainer {
+        max-width: 350px;
+    }
+    .webDesignBannerContainer {
+        margin-top: -30px;
+    }
+    .webDesignBannerOuter { 
+        height: unset;
+    }
+    .cardIconContainer {
+        height: 30px;
+    }
+    .darkCtaContainer {
+        padding-bottom: 94px;
+    }
+    .darkCtaLottieContainer {
+        top: unset;
+        bottom: 0px;
+        transform: translateY(calc(100% - 172px)) translateX(100%);
+        height: 550px;
+    }
+    .darkCtaTextContainer {
+        max-width: unset;
+        width: 100%;
+    }
+    .serviceCardButtonGroup > *.buttonFilled {
+        padding-left: 9px;
+        padding-right: 9px;
+        text-align: center;
+        flex: 1;
+    }
+    .serviceCardButtonGroup > *.buttonFilled svg {
+        margin-left: 8px;
+    }
+}
+@media (max-width: 360px) {
+    .serviceCardButtonGroup {
+        flex-direction: column;
+        width: 100%;
+        row-gap: 16px;
+    }
+}
+  
