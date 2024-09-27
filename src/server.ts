@@ -37,17 +37,18 @@ const start = async () => {
         },
       },
     })
-  
     if (process.env.NEXT_BUILD) {
       app.listen(PORT, async () => {
-        payload.logger.info(
-          'Next.js is building for production'
-        )
+        payload.logger.info('Next.js is building for production')
   
-        // @ts-expect-error
-        await nextBuild(path.join(__dirname, '../'))
-  
-        process.exit()
+        try {
+          // @ts-expect-error
+          await nextBuild(path.join(__dirname, '../'))
+          process.exit(0)
+        } catch (err) {
+          console.error('Error building Next.js:', err)
+          process.exit(1)
+        }
       })
   
       return
