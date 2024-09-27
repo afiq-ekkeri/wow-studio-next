@@ -15,7 +15,23 @@ dotenv.config({
     path: path.resolve(__dirname, '../.env'),
 })
 
-  
+const getSSLConfig = () => {
+  if (process.env.NODE_ENV === 'production') {
+    if (process.env.CERTIFICATE) {
+      return {
+        rejectUnauthorized: true,
+        ca: process.env.CERTIFICATE
+      }
+    } else {
+      console.warn('No SSL certificate provided, SSL verification will be disabled')
+      return {
+        rejectUnauthorized: false
+      }
+    }
+  }
+  return false
+}
+
 
 export default buildConfig({
     serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
@@ -61,9 +77,7 @@ export default buildConfig({
     db: postgresAdapter({
       pool: {
         connectionString: process.env.DATABASE_URL,
-        ssl: process.env.NODE_ENV === 'production' 
-          ? { rejectUnauthorized: true } 
-          : { rejectUnauthorized: false }
+        ssl: getSSLConfig()
       }
     }),
     typescript: {
