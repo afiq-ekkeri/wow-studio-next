@@ -10,6 +10,7 @@ import { s3Adapter } from "@payloadcms/plugin-cloud-storage/s3";
 import path from 'path'
 import dotenv from 'dotenv'
 import { Media } from './collections/Media'
+import { Users } from './collections/Users';
 
 dotenv.config({
     path: path.resolve(__dirname, '../.env'),
@@ -44,9 +45,9 @@ const getSSLConfig = () => {
 
 export default buildConfig({
     serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
-     collections: [Media],
+     collections: [Users,Media],
     routes: {
-        admin: '/admin-login',
+        admin: '/admin',
     },
     plugins: [
         cloudStorage({

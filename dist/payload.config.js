@@ -15,12 +15,18 @@ var Media_1 = require("./collections/Media");
 dotenv_1.default.config({
     path: path_1.default.resolve(__dirname, '../.env'),
 });
+// const sslCert = fs.readFileSync('./../ca-certificate.crt').toString()
 var getSSLConfig = function () {
+    console.log('NODE_ENV:', process.env.NODE_ENV);
+    console.log('SSL_CERT_BASE64 present:', !!process.env.SSL_CERT_BASE64);
     if (process.env.NODE_ENV === 'production') {
-        if (process.env.CERTIFICATE) {
+        console.log('Production environment detected');
+        if (process.env.SSL_CERT_BASE64) {
+            console.log('Using provided SSL certificate');
+            var decodedCert = Buffer.from(process.env.SSL_CERT_BASE64, 'base64').toString('utf-8');
             return {
                 rejectUnauthorized: true,
-                ca: process.env.CERTIFICATE
+                ca: decodedCert
             };
         }
         else {
@@ -30,6 +36,7 @@ var getSSLConfig = function () {
             };
         }
     }
+    console.log('Not in production, SSL disabled');
     return false;
 };
 exports.default = (0, config_1.buildConfig)({

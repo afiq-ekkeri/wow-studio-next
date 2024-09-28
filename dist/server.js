@@ -54,35 +54,47 @@ var createContext = function (_a) {
     });
 };
 var start = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var payload;
+    var payload_1, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, (0, get_payload_1.getPayloadClient)({
-                    initOptions: {
-                        express: app,
-                        onInit: function (cms) { return __awaiter(void 0, void 0, void 0, function () {
-                            return __generator(this, function (_a) {
-                                cms.logger.info("Admin URL: ".concat(cms.getAdminURL()));
-                                return [2 /*return*/];
-                            });
-                        }); },
-                    },
-                })];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, (0, get_payload_1.getPayloadClient)({
+                        initOptions: {
+                            express: app,
+                            onInit: function (cms) { return __awaiter(void 0, void 0, void 0, function () {
+                                return __generator(this, function (_a) {
+                                    cms.logger.info("Admin URL: ".concat(cms.getAdminURL()));
+                                    return [2 /*return*/];
+                                });
+                            }); },
+                        },
+                    })];
             case 1:
-                payload = _a.sent();
+                payload_1 = _a.sent();
                 if (process.env.NEXT_BUILD) {
                     app.listen(PORT, function () { return __awaiter(void 0, void 0, void 0, function () {
+                        var err_2;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
                                 case 0:
-                                    payload.logger.info('Next.js is building for production');
-                                    // @ts-expect-error
-                                    return [4 /*yield*/, (0, build_1.default)(path_1.default.join(__dirname, '../'))];
+                                    payload_1.logger.info('Next.js is building for production');
+                                    _a.label = 1;
                                 case 1:
-                                    // @ts-expect-error
+                                    _a.trys.push([1, 3, , 4]);
+                                    //@ts-expect-error
+                                    return [4 /*yield*/, (0, build_1.default)(path_1.default.join(__dirname, '../'))];
+                                case 2:
+                                    //@ts-expect-error
                                     _a.sent();
-                                    process.exit();
-                                    return [2 /*return*/];
+                                    process.exit(0);
+                                    return [3 /*break*/, 4];
+                                case 3:
+                                    err_2 = _a.sent();
+                                    console.error('Error building Next.js:', err_2);
+                                    process.exit(1);
+                                    return [3 /*break*/, 4];
+                                case 4: return [2 /*return*/];
                             }
                         });
                     }); });
@@ -90,16 +102,29 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                 }
                 app.use(function (req, res) { return (0, next_utils_1.nextHandler)(req, res); });
                 next_utils_1.nextApp.prepare().then(function () {
-                    payload.logger.info('Next.js started');
+                    payload_1.logger.info('Next.js started');
                     app.listen(PORT, function () { return __awaiter(void 0, void 0, void 0, function () {
                         return __generator(this, function (_a) {
-                            payload.logger.info("Next.js App URL: ".concat(process.env.NEXT_PUBLIC_SERVER_URL));
+                            payload_1.logger.info("Next.js App URL: ".concat(process.env.NEXT_PUBLIC_SERVER_URL));
                             return [2 /*return*/];
                         });
                     }); });
                 });
-                return [2 /*return*/];
+                return [3 /*break*/, 3];
+            case 2:
+                err_1 = _a.sent();
+                console.error('Error starting server:', err_1);
+                if (err_1 instanceof Error) {
+                    console.error('Error message:', err_1.message);
+                    console.error('Error stack:', err_1.stack);
+                }
+                process.exit(1);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-start();
+start().catch(function (err) {
+    console.error('Unhandled error in start function:', err);
+    process.exit(1);
+});
