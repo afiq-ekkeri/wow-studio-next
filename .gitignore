@@ -27,7 +27,8 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
-ca-certificate.crt.crt
+ca-certificate.crt
+cert_base64.txt
 
 # vercel
 .vercel

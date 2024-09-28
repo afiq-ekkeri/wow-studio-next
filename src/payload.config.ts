@@ -15,17 +15,20 @@ dotenv.config({
     path: path.resolve(__dirname, '../.env'),
 })
 
+// const sslCert = fs.readFileSync('./../ca-certificate.crt').toString()
+
 const getSSLConfig = () => {
   console.log('NODE_ENV:', process.env.NODE_ENV);
-  console.log('CERTIFICATE present:', !!process.env.CERTIFICATE);
+  console.log('SSL_CERT_BASE64 present:', !!process.env.SSL_CERT_BASE64);
   
   if (process.env.NODE_ENV === 'production') {
     console.log('Production environment detected');
-    if (process.env.CERTIFICATE) {
+    if (process.env.SSL_CERT_BASE64) {
       console.log('Using provided SSL certificate');
+      const decodedCert = Buffer.from(process.env.SSL_CERT_BASE64, 'base64').toString('utf-8');
       return {
         rejectUnauthorized: true,
-        ca: process.env.CERTIFICATE
+        ca: decodedCert
       };
     } else {
       console.warn('No SSL certificate provided, SSL verification will be disabled');
