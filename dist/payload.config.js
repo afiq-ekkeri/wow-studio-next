@@ -12,10 +12,10 @@ var s3_1 = require("@payloadcms/plugin-cloud-storage/s3");
 var path_1 = __importDefault(require("path"));
 var dotenv_1 = __importDefault(require("dotenv"));
 var Media_1 = require("./collections/Media");
+var Users_1 = require("./collections/Users");
 dotenv_1.default.config({
     path: path_1.default.resolve(__dirname, '../.env'),
 });
-// const sslCert = fs.readFileSync('./../ca-certificate.crt').toString()
 var getSSLConfig = function () {
     console.log('NODE_ENV:', process.env.NODE_ENV);
     console.log('SSL_CERT_BASE64 present:', !!process.env.SSL_CERT_BASE64);
@@ -41,9 +41,9 @@ var getSSLConfig = function () {
 };
 exports.default = (0, config_1.buildConfig)({
     serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
-    collections: [Media_1.Media],
+    collections: [Users_1.Users, Media_1.Media],
     routes: {
-        admin: '/admin-login',
+        admin: '/admin',
     },
     plugins: [
         (0, plugin_cloud_storage_1.cloudStorage)({
@@ -67,6 +67,7 @@ exports.default = (0, config_1.buildConfig)({
     ],
     admin: {
         bundler: (0, bundler_webpack_1.webpackBundler)(),
+        user: 'users',
         meta: {
             titleSuffix: " - WowStudio"
         }

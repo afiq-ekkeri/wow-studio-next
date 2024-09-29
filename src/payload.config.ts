@@ -16,8 +16,6 @@ dotenv.config({
     path: path.resolve(__dirname, '../.env'),
 })
 
-// const sslCert = fs.readFileSync('./../ca-certificate.crt').toString()
-
 const getSSLConfig = () => {
   console.log('NODE_ENV:', process.env.NODE_ENV);
   console.log('SSL_CERT_BASE64 present:', !!process.env.SSL_CERT_BASE64);
@@ -45,7 +43,7 @@ const getSSLConfig = () => {
 
 export default buildConfig({
     serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
-     collections: [Users,Media],
+     collections: [Users, Media],
     routes: {
         admin: '/admin',
     },
@@ -71,9 +69,10 @@ export default buildConfig({
       ],
     admin: {
         bundler: webpackBundler(),
+        user: 'users',
         meta: {
             titleSuffix: " - WowStudio"
-        }
+        } 
     },
     editor: lexicalEditor({}),
     rateLimit: {
