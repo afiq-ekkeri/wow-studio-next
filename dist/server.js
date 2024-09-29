@@ -100,6 +100,10 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                     }); });
                     return [2 /*return*/];
                 }
+                // Handle Payload routes
+                if (payload_1.express) {
+                    app.use(payload_1.express);
+                }
                 app.use(function (req, res) { return (0, next_utils_1.nextHandler)(req, res); });
                 next_utils_1.nextApp.prepare().then(function () {
                     payload_1.logger.info('Next.js started');
