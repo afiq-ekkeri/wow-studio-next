@@ -4,9 +4,6 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { cloudStorage } from "@payloadcms/plugin-cloud-storage";
 import { s3Adapter } from "@payloadcms/plugin-cloud-storage/s3";
-
-
-
 import path from 'path'
 import dotenv from 'dotenv'
 import { Media } from './collections/Media'
@@ -19,6 +16,7 @@ dotenv.config({
 const getSSLConfig = () => {
   console.log('NODE_ENV:', process.env.NODE_ENV);
   console.log('SSL_CERT_BASE64 present:', !!process.env.SSL_CERT_BASE64);
+  console.log('DATABASE_URL:', process.env.DATABASE_URL); // Log the database URL (be careful not to log sensitive info)
   
   if (process.env.NODE_ENV === 'production') {
     console.log('Production environment detected');
@@ -43,7 +41,7 @@ const getSSLConfig = () => {
 
 export default buildConfig({
     serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
-     collections: [Users, Media],
+    collections: [Users, Media],
     routes: {
         admin: '/admin',
     },

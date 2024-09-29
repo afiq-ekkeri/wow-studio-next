@@ -1,23 +1,11 @@
 import express from 'express';
 import { getPayloadClient } from './get-payload'
 import { nextApp, nextHandler } from './next-utils'
-import * as trpcExpress from '@trpc/server/adapters/express'
 import nextBuild from 'next/dist/build'
-import { inferAsyncReturnType } from "@trpc/server";
 import path from 'path'
 
 const app = express()
-
 const PORT = Number(process.env.PORT) || 3000;
-
-const createContext = ({
-    req,
-    res,
-}: trpcExpress.CreateExpressContextOptions) => ({
-    req,
-    res,
-})
-export type ExpressContext = inferAsyncReturnType<typeof createContext>
 
 const start = async () => {
   try {
@@ -46,18 +34,35 @@ const start = async () => {
   
       return
     }
-    
+    // Add logging middleware
+    app.use((req, res, next) => {
+      console.log(`Incoming request: ${req.method} ${req.url}`)
+      next()
+    })
+    app.get('/test', (req, res) => {
+      res.send('Server is running correctly')
+    })
     // Handle Payload routes
     if (payload.express) {
-      app.use(payload.express)      
+      console.log('Setting up Payload routes')
+      app.use(payload.express)
+    } else {
+      console.warn('payload.express is not available')
     }
-    app.use((req, res) => nextHandler(req, res))
+
+    // Handle Next.js routes
+    console.log('Setting up Next.js handler')
+    app.use((req, res, next) => {
+      console.log(`Passing request to Next.js: ${req.method} ${req.url}`)
+      return nextHandler(req, res)
+    })
   
     nextApp.prepare().then(() => {
       payload.logger.info('Next.js started')
   
       app.listen(PORT, async () => {
-        payload.logger.info(`Next.js App URL: ${process.env.NEXT_PUBLIC_SERVER_URL}`)
+        payload.logger.info(`App URL: ${process.env.NEXT_PUBLIC_SERVER_URL}`)
+        console.log(`Server is running on port ${PORT}`)
       })
     })
   } catch (err) {
