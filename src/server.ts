@@ -8,7 +8,9 @@ const app = express()
 const PORT = Number(process.env.PORT) || 3000;
 
 const start = async () => {
+  console.log('Starting server...');
   try {
+    console.log('Initializing Payload...');
     const payload = await getPayloadClient({
       initOptions: {
         express: app,
@@ -17,14 +19,16 @@ const start = async () => {
         },
       },
     })
+    console.log('Payload initialized');
   
     if (process.env.NEXT_BUILD) {
+      console.log('Next.js build process starting...');
       app.listen(PORT, async () => {
         payload.logger.info('Next.js is building for production')
   
         try {
-          //@ts-expect-error
           await nextBuild(path.join(__dirname, '../'))
+          console.log('Next.js build completed');
           process.exit(0)
         } catch (err) {
           console.error('Error building Next.js:', err)
@@ -34,14 +38,20 @@ const start = async () => {
   
       return
     }
+    
     // Add logging middleware
     app.use((req, res, next) => {
       console.log(`Incoming request: ${req.method} ${req.url}`)
       next()
     })
+
+    console.log('Setting up test route...');
+    // Add the test route here
     app.get('/test', (req, res) => {
+      console.log('Test route accessed');
       res.send('Server is running correctly')
     })
+
     // Handle Payload routes
     if (payload.express) {
       console.log('Setting up Payload routes')
