@@ -27,6 +27,7 @@ const start = async () => {
         payload.logger.info('Next.js is building for production')
   
         try {
+          //@ts-expect-error
           await nextBuild(path.join(__dirname, '../'))
           console.log('Next.js build completed');
           process.exit(0)

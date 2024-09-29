@@ -51,7 +51,11 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
+                console.log('Starting server...');
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                console.log('Initializing Payload...');
                 return [4 /*yield*/, (0, get_payload_1.getPayloadClient)({
                         initOptions: {
                             express: app,
@@ -63,9 +67,11 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                             }); },
                         },
                     })];
-            case 1:
+            case 2:
                 payload_1 = _a.sent();
+                console.log('Payload initialized');
                 if (process.env.NEXT_BUILD) {
+                    console.log('Next.js build process starting...');
                     app.listen(PORT, function () { return __awaiter(void 0, void 0, void 0, function () {
                         var err_2;
                         return __generator(this, function (_a) {
@@ -80,6 +86,7 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                                 case 2:
                                     //@ts-expect-error
                                     _a.sent();
+                                    console.log('Next.js build completed');
                                     process.exit(0);
                                     return [3 /*break*/, 4];
                                 case 3:
@@ -98,7 +105,10 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                     console.log("Incoming request: ".concat(req.method, " ").concat(req.url));
                     next();
                 });
+                console.log('Setting up test route...');
+                // Add the test route here
                 app.get('/test', function (req, res) {
+                    console.log('Test route accessed');
                     res.send('Server is running correctly');
                 });
                 // Handle Payload routes
@@ -125,8 +135,8 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                         });
                     }); });
                 });
-                return [3 /*break*/, 3];
-            case 2:
+                return [3 /*break*/, 4];
+            case 3:
                 err_1 = _a.sent();
                 console.error('Error starting server:', err_1);
                 if (err_1 instanceof Error) {
@@ -134,8 +144,8 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                     console.error('Error stack:', err_1.stack);
                 }
                 process.exit(1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); };
