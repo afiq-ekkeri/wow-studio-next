@@ -46,7 +46,11 @@ const start = async () => {
   
       return
     }
-  
+    
+    // Handle Payload routes
+    if (payload.express) {
+      app.use(payload.express)      
+    }
     app.use((req, res) => nextHandler(req, res))
   
     nextApp.prepare().then(() => {
